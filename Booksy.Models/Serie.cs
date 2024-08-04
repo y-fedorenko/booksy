@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Booksy.Models
 {
-    internal class Serie
+    public class Serie
     {
+        public int SeriesId { get; set; }
+        public string SeriesName     { get; set; }
+        public string? SeriesDescription { get; set; }
+
     }
 }

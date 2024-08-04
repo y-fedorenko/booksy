@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Booksy.Models
 {
-    internal class Book
+    public class Book
     {
         public int BookID { get; set; }
         public string Title { get; set; }
@@ -15,6 +15,8 @@ namespace Booksy.Models
         public string Category { get; set; }
         public int AuthorID { get; set; }
         public int SeriesID { get; set; }
-        public int Quantity { get; set; }
+
+        public string CoverUrl { get; set; }
+        public string DownloadUrl { get; set; }
     }
 }
