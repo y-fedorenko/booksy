@@ -13,10 +13,13 @@ namespace Booksy.Models
         public string Description { get; set; }
         public int Price { get; set; }
         public string Category { get; set; }
-        public int AuthorID { get; set; }
-        public int SeriesID { get; set; }
+        public int? AuthorID { get; set; }
+        public int? SeriesID { get; set; }
 
-        public string CoverUrl { get; set; }
-        public string DownloadUrl { get; set; }
+        public string? CoverUrl { get; set; }
+        public string? DownloadUrl { get; set; }
+
+        public Author Author { get; set; }
+        public Serie Serie { get; set; }
     }
 }

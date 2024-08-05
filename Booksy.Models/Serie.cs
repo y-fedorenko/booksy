@@ -12,5 +12,7 @@ namespace Booksy.Models
         public string SeriesName     { get; set; }
         public string? SeriesDescription { get; set; }
 
+        public ICollection<Book> Books { get; set; }
+
     }
 }

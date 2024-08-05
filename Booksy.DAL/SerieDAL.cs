@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Booksy.DAL
 {
-    internal class SerieDAL
+    public class SerieDAL
     {
     }
 }

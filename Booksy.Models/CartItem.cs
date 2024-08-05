@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Fluent.Infrastructure.FluentModel;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Booksy.Models
 {
     public class CartItem
     {
-        public int CartItemId   { get; set; }
+        public int CartItemId { get; set; }
         public int BookId { get; set; }
-        public int UserId   { get; set; }
-        
+        public string UserId { get; set; }
+
+        public Book Book { get; set; }
+        public ApplicationUser User { get; set; }
     }
 }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Booksy.DAL
+namespace Booksy.BLL
 {
-    internal class UserDAL
+    internal class CartItemService
     {
     }
 }

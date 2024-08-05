@@ -22,4 +22,8 @@
     <ProjectReference Include="..\Booksy.Models\Booksy.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\" />
+  </ItemGroup>
+
 </Project>
