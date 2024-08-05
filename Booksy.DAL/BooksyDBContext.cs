@@ -9,30 +9,22 @@ namespace Booksy.DAL
     {
         public DbSet<Book> Books { get; set; }
         public DbSet<Author> Authors { get; set; }
-
         public DbSet<Serie> Series { get; set; }
-
         public DbSet<CartItem> CartItems { get; set; }
-
-        public DbSet<IdentityUser> Users { get; set; }
 
         public BooksyDbContext(DbContextOptions<BooksyDbContext> options) : base(options) { }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder) //override cant change protection level, it is protected by default
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);  
 
-            //PK
-            modelBuilder.Entity<Book>()
-                .HasKey(book => book.BookID);
+            // PK
+            modelBuilder.Entity<Book>().HasKey(book => book.BookID);
+            modelBuilder.Entity<Author>().HasKey(author => author.AuthorId);
+            modelBuilder.Entity<Serie>().HasKey(serie => serie.SeriesId);
+            modelBuilder.Entity<CartItem>().HasKey(cartItem => cartItem.CartItemId);
 
-            modelBuilder.Entity<Author>()
-                .HasKey(book => book.AuthorId);
-
-            modelBuilder.Entity<Serie>()
-                .HasKey(serie => serie.SeriesId);
-
-
-            //Properties
+            // Properties
             modelBuilder.Entity<Book>()
                 .Property(book => book.Title)
                 .IsRequired()
@@ -81,12 +73,12 @@ namespace Booksy.DAL
                 .Property(s => s.SeriesName)
                 .IsRequired()
                 .HasMaxLength(255);
+
             modelBuilder.Entity<Serie>()
                 .Property(s => s.SeriesDescription)
                 .HasMaxLength(65535);
 
-            //Relations
-
+            // Relations
             modelBuilder.Entity<Book>()
                 .HasOne(book => book.Author)
                 .WithMany(a => a.Books)
@@ -106,10 +98,8 @@ namespace Booksy.DAL
 
             modelBuilder.Entity<CartItem>()
                 .HasOne(c => c.User)
-                .WithMany()
+                .WithMany(u => u.CartItems)
                 .HasForeignKey(c => c.UserId);
-
-
         }
     }
 }
