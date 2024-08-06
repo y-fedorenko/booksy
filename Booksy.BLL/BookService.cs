@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Booksy.BLL
 {
-    internal class BookService
+    public class BookService
     {
+        public class Placeholder { }
     }
 }

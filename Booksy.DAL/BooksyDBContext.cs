@@ -1,28 +1,29 @@
 ﻿using Booksy.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Booksy.DAL
 {
-    public class BooksyDbContext : IdentityDbContext<IdentityUser>
+    public class BooksyDbContext : DbContext
     {
         public DbSet<Book> Books { get; set; }
         public DbSet<Author> Authors { get; set; }
         public DbSet<Serie> Series { get; set; }
-        public DbSet<CartItem> CartItems { get; set; }
 
         public BooksyDbContext(DbContextOptions<BooksyDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);  
+            base.OnModelCreating(modelBuilder);
 
             // PK
             modelBuilder.Entity<Book>().HasKey(book => book.BookID);
             modelBuilder.Entity<Author>().HasKey(author => author.AuthorId);
             modelBuilder.Entity<Serie>().HasKey(serie => serie.SeriesId);
-            modelBuilder.Entity<CartItem>().HasKey(cartItem => cartItem.CartItemId);
 
             // Properties
             modelBuilder.Entity<Book>()
@@ -91,15 +92,7 @@ namespace Booksy.DAL
                 .HasForeignKey(book => book.SeriesID)
                 .OnDelete(DeleteBehavior.SetNull);
 
-            modelBuilder.Entity<CartItem>()
-                .HasOne(cart => cart.Book)
-                .WithMany()
-                .HasForeignKey(c => c.BookId);
-
-            modelBuilder.Entity<CartItem>()
-                .HasOne(c => c.User)
-                .WithMany(u => u.CartItems)
-                .HasForeignKey(c => c.UserId);
         }
+
     }
 }

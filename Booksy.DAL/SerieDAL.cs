@@ -8,5 +8,6 @@ namespace Booksy.DAL
 {
     public class SerieDAL
     {
+        public class Placeholder { }
     }
 }

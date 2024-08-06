@@ -1,8 +1,8 @@
-using booksy.Models;
+using Booksy.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace booksy.Controllers
+namespace Booksy.Controllers
 {
     public class HomeController : Controller
     {
