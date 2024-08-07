@@ -23,7 +23,7 @@ namespace Booksy.DAL
             base.OnModelCreating(modelBuilder);
 
             // PK
-            modelBuilder.Entity<Book>().HasKey(book => book.BookID);
+            modelBuilder.Entity<Book>().HasKey(book => book.BookId);
             modelBuilder.Entity<Author>().HasKey(author => author.AuthorId);
             modelBuilder.Entity<Serie>().HasKey(serie => serie.SeriesId);
             modelBuilder.Entity<Comment>().HasKey(serie => serie.CommentId);
@@ -100,13 +100,13 @@ namespace Booksy.DAL
             modelBuilder.Entity<Book>()
                 .HasOne(book => book.Author)
                 .WithMany(a => a.Books)
-                .HasForeignKey(book => book.AuthorID)
+                .HasForeignKey(book => book.AuthorId)
                 .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Book>()
                 .HasOne(book => book.Serie)
                 .WithMany(a => a.Books)
-                .HasForeignKey(book => book.SeriesID)
+                .HasForeignKey(book => book.SeriesId)
                 .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Comment>()
@@ -114,6 +114,11 @@ namespace Booksy.DAL
                 .WithMany(b => b.Comments)
                 .HasForeignKey(c => c.BookId)
                 .OnDelete(DeleteBehavior.NoAction);
+            //
+            modelBuilder.Entity<Book>()
+                .HasMany(b => b.Comments)
+                .WithOne(c => c.Book)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
     }
