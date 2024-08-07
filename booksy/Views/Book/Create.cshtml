@@ -1,31 +1,49 @@
-﻿@model IEnumerable<Booksy.Models.Book>
+﻿@model Booksy.ViewModels.BookCreateViewModel
 
 @{
     ViewData["Title"] = "Create";
 }
-@{/*
-        <h1>Add a Book</h1>
-        @using (Html.BeginForm())
-    {
-        <div class="form-group">
-        <label asp-for="Title" class="control-label"></label>
-        <input asp-for="Title" class="form-control" />
-        <span asp-validation-for="Title" class="text-danger"></span>
-    </div>
-        <div class="form-group">
-        <label asp-for="Author" class="control-label"></label>
-        <input asp-for="Author" class="form-control" />
-        <span asp-validation-for="Author" class="text-danger"></span>
-    </div>
-        <div class="form-group">
-        <label asp-for="Price" class="control-label"></label>
-        <input asp-for="Price" class="form-control" />
-        <span asp-validation-for="Price" class="text-danger"></span>
-    </div>
-        <div class="form-group">
-        <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-    })
 
-    */
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Book.Title, "Book Name")
+        @Html.TextBoxFor(m => m.Book.Title, new { @class = "form-control", id = "book-title" })
+        @Html.ValidationMessageFor(m => m.Book.Title, "Enter a valid book name", new { @class = "text-danger"})
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Book.Description, "Description")
+        @Html.TextBoxFor(m => m.Book.Description, new { @class = "form-control", id = "book-description" })
+        @Html.ValidationMessageFor(m => m.Book.Description, "Enter a valid description for the book", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Book.Price, "Price")
+        @Html.TextBoxFor(m => m.Book.Price, new { @class = "form-control", id = "book-price" })
+        @Html.ValidationMessageFor(m => m.Book.Price, "Enter a valid amount in number", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Book.Category, "Category")
+        @Html.TextBoxFor(m => m.Book.Category, new { @class = "form-control", id = "book-category" })
+        @Html.ValidationMessageFor(m => m.Book.Category, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Book.AuthorId, "Author")
+        @Html.DropDownListFor(m => m.Book.AuthorId, new SelectList(Model.Authors, "AuthorId", "Name"), "Select an Author", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Book.AuthorId, "Select a valid author", new { @class = "text-danger" })
+    </div>
+    @*
+    <div class="form-group">
+        @Html.LabelFor(m => m.Book.SeriesId, "Series")
+        @Html.DropDownListFor(m => m.Book.SeriesId, new SelectList(Model.Series, "SeriesId", "Title"), "Select a Series", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Book.SeriesId, "Select a valid series", new { @class = "text-danger" })
+
+    </div>
+    *@
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
 }

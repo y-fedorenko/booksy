@@ -4,45 +4,45 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Booksy.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Booksy.DAL
 {
-    public class BookDAL
-    {
+    public class BookDAL {
         public class Placeholder { }
-        public readonly BooksyDbContext _context;
-        public BookDAL(BooksyDbContext context)
-        {
+        private readonly BooksyDbContext _context;
+        public BookDAL(BooksyDbContext context) {
             _context = context;
         }
-        public List<Book> GetBooks()
-        {
-            return _context.Books.ToList();
+        public Book GetBook(int BookId) {
+            return _context.Books.Include(b => b.Author)
+                                .Include(b => b.Serie)
+                                .Include(b => b.Comments)
+                                .FirstOrDefault(b => b.BookId == BookId);
         }
-        public IEnumerable<Book> GetAllBooks()
-        {
+        public List<Book> GetBooks() {
+            return _context.Books.Include(b => b.Author)
+                                .Include(b => b.Serie)
+                                .Include(b => b.Comments)
+                                .ToList();
+        }
+        public IEnumerable<Book> GetAllBooks() {
             return _context.Books;
         }
-        public Book GetBook(int BookID)
-        {
-            return _context.Books.Find(BookID);
-        }
-        public void AddBook(Book book)
-        {
+        public void AddBook(Book book) {
             _context.Books.Add(book);
             _context.SaveChanges();
         }
-        public void UpdateBook(Book book)
-        {
+        public void UpdateBook(Book book) {
             _context.Books.Update(book);
             _context.SaveChanges();
         }
-        public void DeleteBook(int BookID)
-        {
-            Book book = _context.Books.Find(BookID);
-            _context.Books.Remove(book);
-            _context.SaveChanges();
+        public void DeleteBook(int BookID) {
+            var book = _context.Books.Find(BookID);
+            if (book != null) {
+                _context.Books.Remove(book);
+                _context.SaveChanges();
+            }
         }
-
     }
 }

@@ -16,17 +16,15 @@ namespace Booksy.BLL
         {
             _bookDAL = bookDAL;
         }
-        public List<Book> GetBooks()
-        {
-            return _bookDAL.GetBooks();
-        }
-        public IEnumerable<Book> GetAllBooks()
-        {
-            return _bookDAL.GetAllBooks();
-        }
         public Book GetBook(int BookID)
         {
             return _bookDAL.GetBook(BookID);
+        }
+        public List<Book> GetBooks() {
+            return _bookDAL.GetBooks();
+        }
+        public IEnumerable<Book> GetBooksAll() {
+            return _bookDAL.GetBooks();
         }
         public void AddBook(Book book)
         {

@@ -1,13 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Booksy.DAL;
 using Booksy.BLL;
 using Booksy.Models;
+using Booksy.ViewModels;
+using Booksy.Services;
 
 
 namespace Booksy.Controllers {
     public class BookController : Controller {
         private readonly BookService _bookService;
-        public BookController(BookService bookService) {
+        private readonly AuthorDAL _authorDAL;
+        private readonly SerieDAL _serieDAL;
+        public BookController(BookService bookService, AuthorDAL authorDAL, SerieDAL serieDAL) {
             _bookService = bookService;
+            _authorDAL = authorDAL;
+            _serieDAL = serieDAL;
         }
 
         public IActionResult Index() {
@@ -21,8 +28,24 @@ namespace Booksy.Controllers {
             }
             return View(book);
         }
-        public IActionResult Create() {
-            return View();
+        [HttpGet]
+        public async Task<IActionResult> Create() {
+            var ViewModel = new BookCreateViewModel {
+                Book = new Book(),
+                Authors = await _authorDAL.GetAllAuthorsAsync(),
+                //Series = await _serieDAL.GetSeries()
+            };
+            return View(ViewModel);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(BookCreateViewModel ViewModel) {
+            if (ModelState.IsValid) {
+                _bookService.AddBook(ViewModel.Book);
+                return RedirectToAction("Index");
+            }
+            ViewModel.Authors = await _authorDAL.GetAllAuthorsAsync();
+           // ViewModel.Series = await _serieDAL.GetSeries();
+            return View(ViewModel);
         }
         public IActionResult Add([Bind("BookID,Title,Author,Genre,Price")] Book book) {
             if (ModelState.IsValid) {
@@ -31,14 +54,27 @@ namespace Booksy.Controllers {
             }
             return View(book);
         }
+        [HttpGet]
         public IActionResult Edit(int BookID) {
             var book = _bookService.GetBook(BookID);
             if (book == null) {
                 return NotFound();
             }
+            // You may need to load authors and series here if you are displaying dropdowns
+            // var authors = _authorDAL.GetAllAuthorsAsync();
+            // var series = _serieDAL.GetAllSeriesAsync();
+
+            // var viewModel = new BookEditViewModel
+            // {
+            //     Book = book,
+            //     Authors = authors,
+            //     Series = series
+            // };
+
             return View(book);
         }
-        public IActionResult Edit(int BookID, [Bind("BookID,Title,Author,Genre,Price")] Book book) {
+        [HttpPost]
+        public async Task<IActionResult> Edit(int BookID, [Bind("BookID,Title,Author,Genre,Price")] Book book) {
             if (BookID != book.BookId) {
                 return NotFound();
             }
@@ -55,6 +91,7 @@ namespace Booksy.Controllers {
             }
             return View(book);
         }
+        [HttpPost, ActionName("Delete")]
         public IActionResult DeleteConfirmed(int BookID) {
             _bookService.DeleteBook(BookID);
             return RedirectToAction(nameof(Index));
