@@ -24,6 +24,7 @@ namespace Booksy.DAL
             modelBuilder.Entity<Book>().HasKey(book => book.BookID);
             modelBuilder.Entity<Author>().HasKey(author => author.AuthorId);
             modelBuilder.Entity<Serie>().HasKey(serie => serie.SeriesId);
+            modelBuilder.Entity<Comment>().HasKey(serie => serie.CommentId);
 
             // Properties
             modelBuilder.Entity<Book>()
@@ -79,6 +80,20 @@ namespace Booksy.DAL
                 .Property(s => s.SeriesDescription)
                 .HasMaxLength(65535);
 
+            modelBuilder.Entity<Comment>()
+                .Property(c => c.CommentText)
+                .IsRequired()
+                .HasMaxLength(65535);
+
+            modelBuilder.Entity<Comment>()
+                .Property(c => c.UserName)
+                .IsRequired()
+                .HasMaxLength(255);
+
+            modelBuilder.Entity<Comment>()
+                .Property(c => c.CommentTime)
+                .IsRequired();
+
             // Relations
             modelBuilder.Entity<Book>()
                 .HasOne(book => book.Author)
@@ -92,6 +107,11 @@ namespace Booksy.DAL
                 .HasForeignKey(book => book.SeriesID)
                 .OnDelete(DeleteBehavior.SetNull);
 
+            modelBuilder.Entity<Comment>()
+                .HasOne(c => c.Book)
+                .WithMany(b => b.Comments)
+                .HasForeignKey(c => c.BookId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
 
     }
