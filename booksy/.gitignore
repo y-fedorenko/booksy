@@ -12,3 +12,4 @@ obj/
 *.ncrunch*
 *.DS_Store
 booksy/appsettings.json
+booksy/appsettings.Development.json
