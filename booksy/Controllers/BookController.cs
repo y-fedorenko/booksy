@@ -24,7 +24,7 @@ namespace Booksy.Controllers {
         public IActionResult Create() {
             return View();
         }
-        public IActionResult Create([Bind("BookID,Title,Author,Genre,Price")] Book book) {
+        public IActionResult Add([Bind("BookID,Title,Author,Genre,Price")] Book book) {
             if (ModelState.IsValid) {
                 _bookService.AddBook(book);
                 return RedirectToAction(nameof(Index));
