@@ -25,6 +25,7 @@ namespace Booksy
             builder.Services.AddScoped<AuthorDAL>();
             builder.Services.AddScoped<BookDAL>();
             builder.Services.AddScoped<SerieDAL>();
+            builder.Services.AddScoped<BookService>();
             //Do the same for the Perfomance and Stage
 
 
