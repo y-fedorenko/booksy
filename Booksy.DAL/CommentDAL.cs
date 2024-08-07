@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Booksy.Models;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace Booksy.DAL
 {
@@ -17,32 +19,32 @@ namespace Booksy.DAL
 
         public async Task<List<Comment>> GetCommentsAsync()
         {
-            return await _context.Comment.ToListAsync();
+            return await _context.Comments.ToListAsync();
         }
 
-        public async Task<Product> GetProductAsync(int id)
+        public async Task<Comment> GetCommentAsync(int id)
         {
-            return await _context.Products.FindAsync(id);
+            return await _context.Comments.FindAsync(id);
         }
 
-        public async Task AddProductAsync(Product product)
+        public async Task AddCommentAsync(Comment comment)
         {
-            _context.Products.Add(product);
+            _context.Comments.Add(comment);
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateProductAsync(Product product)
+        public async Task UpdateCommentAsync(Comment comment)
         {
-            _context.Products.Update(product);
+            _context.Comments.Update(comment);
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteProductAsync(int id)
+        public async Task DeleteCommentAsync(int id)
         {
-            var product = await _context.Products.FindAsync(id);
-            if (product != null)
+            var comment = await _context.Comments.FindAsync(id);
+            if (comment != null)
             {
-                _context.Products.Remove(product);
+                _context.Comments.Remove(comment);
                 await _context.SaveChangesAsync();
             }
         }
