@@ -39,7 +39,7 @@ namespace Booksy.Controllers {
             return View(book);
         }
         public IActionResult Edit(int BookID, [Bind("BookID,Title,Author,Genre,Price")] Book book) {
-            if (BookID != book.BookID) {
+            if (BookID != book.BookId) {
                 return NotFound();
             }
             if (ModelState.IsValid) {
