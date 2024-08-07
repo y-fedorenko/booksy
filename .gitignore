@@ -11,4 +11,5 @@ obj/
 *.config
 *.ncrunch*
 *.DS_Store
-booksy/appsettings.json
+booksy/appsettings.json.
+appsettings*json

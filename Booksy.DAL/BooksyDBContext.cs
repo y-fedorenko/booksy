@@ -108,13 +108,13 @@ namespace Booksy.DAL
                 .WithMany(a => a.Books)
                 .HasForeignKey(book => book.SeriesId)
                 .OnDelete(DeleteBehavior.SetNull);
-
+            //Comment deleted => nothing happens to the book
             modelBuilder.Entity<Comment>()
                 .HasOne(c => c.Book)
                 .WithMany(b => b.Comments)
                 .HasForeignKey(c => c.BookId)
                 .OnDelete(DeleteBehavior.NoAction);
-            //
+            //Book deleted => all the comments are gone
             modelBuilder.Entity<Book>()
                 .HasMany(b => b.Comments)
                 .WithOne(c => c.Book)
