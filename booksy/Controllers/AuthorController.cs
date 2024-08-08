@@ -30,13 +30,14 @@ namespace Booksy.Controllers
 
         // POST: Author/Create
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("FirstName,LastName,Biography,ImageUrl")] Author author)
+        public async Task<IActionResult> Create( Author author)
         {
             if (ModelState.IsValid)
             {
                 await _authorService.AddAuthorAsync(author);
                 return RedirectToAction(nameof(Index));
             }
+
             return View(author);
         }
 
@@ -53,7 +54,7 @@ namespace Booksy.Controllers
 
         // POST: Author/Edit/5
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, [Bind("AuthorId,FirstName,LastName,Biography,ImageUrl")] Author author)
+        public async Task<IActionResult> Edit(int id, Author author)
         {
             if (id != author.AuthorId)
             {
