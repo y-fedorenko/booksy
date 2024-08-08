@@ -1,12 +1,11 @@
 ﻿@model Booksy.Models.Book
 
 <div class="book-item">
-    <img src="@Model.CoverUrl" alt="@Model.Title" class="book-cover" />
-    <div class="book-details">
-        <h3>@Model.Title</h3>
-        <p>Price: @Model.Price</p>
-    </div>
+    <img src="@Model.CoverUrl" alt="@Model.Title" />
+    <h4>@Model.Title</h4>
+    <p>@Model.Description</p>
 </div>
+
 
 <style>
     .book-item {
@@ -15,6 +14,7 @@
         margin: 10px;
         width: 200px;
         text-align: center;
+        border-radius: 5px;
     }
 
     .book-cover {
@@ -24,5 +24,9 @@
 
     .book-details {
         margin-top: 10px;
+    }
+
+    h3 {
+        font-size: 3em;
     }
 </style>
