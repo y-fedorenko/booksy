@@ -1,8 +1,31 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model BooksAndAuthorsViewModel
+
+@{
+    ViewData["Title"] = "Books and Authors";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<h2>@ViewData["Title"]</h2>
+
+<h3>Books</h3>
+<div class="books-container">
+    @foreach (var book in Model.Books)
+    {
+        @await Html.PartialAsync("_BookPartial", book)
+    }
 </div>
+
+<h3>Authors</h3>
+<div class="authors-container">
+    @foreach (var author in Model.Authors)
+    {
+        @await Html.PartialAsync("_AuthorPartial", author)
+    }
+</div>
+
+<style>
+    .books-container, .authors-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+</style>
