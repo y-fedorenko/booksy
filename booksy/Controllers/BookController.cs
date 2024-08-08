@@ -143,8 +143,32 @@ public class BookController : Controller
 
         return View(bookViewModel);
     }
+    [HttpGet]
+    public IActionResult Delete(int bookId)
+    {
+        var book = _bookService.GetBook(bookId);
+        if (book == null)
+        {
+            return NotFound();
+        }
 
-    // GET action to display the form for adding a new comment
+        return View(book);
+    }
+
+    [HttpPost, ActionName("DeleteConfirmed")]
+    public IActionResult DeleteConfirmed(int bookId)
+    {
+        var book = _bookService.GetBook(bookId);
+        if (book == null)
+        {
+            return NotFound();
+        }
+
+        _bookService.DeleteBook(bookId);
+        return RedirectToAction(nameof(Index));
+    }
+
+    //comments below
     [HttpGet]
 	public IActionResult CreateComment(int bookId)
 	{

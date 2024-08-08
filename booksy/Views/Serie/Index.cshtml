@@ -1,20 +1,21 @@
-﻿@model IEnumerable<Serie>
+﻿@model IEnumerable<Booksy.Models.Serie>
 
 @{
-    ViewData["Title"] = "Series List";
+    ViewData["Title"] = "Series";
 }
 
-<h2>Series List</h2>
+<h2>Series</h2>
 
 <p>
-    <a asp-action="Create" class="btn btn-primary">Create New Serie</a>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
 </p>
 
-<table class="table table-striped">
+<table class="table">
     <thead>
         <tr>
-            <th>Series Name</th>
-            <th>Series Description</th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().SeriesName)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -22,12 +23,13 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.SeriesName</td>
-                <td>@item.SeriesDescription</td>
                 <td>
-                    <a asp-action="Details" asp-route-SerieId="@item.SeriesId" class="btn btn-info">Details</a> |
-                    <a asp-action="Edit" asp-route-SerieId="@item.SeriesId" class="btn btn-warning">Edit</a> |
-                    <a asp-action="Delete" asp-route-SerieId="@item.SeriesId" class="btn btn-danger">Delete</a>
+                    @Html.DisplayFor(modelItem => item.SeriesName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-serieId="@item.SeriesId" class="btn btn-primary">Edit</a> |
+                    <a asp-action="Details" asp-route-serieId="@item.SeriesId" class="btn btn-info">Details</a> |
+                    <a asp-action="Delete" asp-route-serieId="@item.SeriesId" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         }

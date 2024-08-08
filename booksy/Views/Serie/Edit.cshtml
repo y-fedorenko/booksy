@@ -1,34 +1,28 @@
-﻿@model SerieViewModel
+﻿@model Booksy.Models.SerieViewModel
 
 @{
-    ViewData["Title"] = "Edit Serie";
+    ViewData["Title"] = "Edit Series";
 }
 
-<h2>Edit Serie</h2>
+<h2>@ViewData["Title"]</h2>
 
-<h4>Serie</h4>
-<hr />
-<div class="row">
-    <div class="col-md-12">
-        <form asp-action="Edit">
-            <div class="form-group">
-                <input type="hidden" asp-for="SerieId" />
-                <label asp-for="SeriesName" class="control-label"></label>
-                <input asp-for="SeriesName" class="form-control" />
-                <span asp-validation-for="SeriesName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SeriesDescription" class="control-label"></label>
-                <input asp-for="SeriesDescription" class="form-control" />
-                <span asp-validation-for="SeriesDescription" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.HiddenFor(model => model.SerieId)
+        @Html.LabelFor(model => model.SeriesName)
+        @Html.TextBoxFor(model => model.SeriesName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.SeriesName)
     </div>
-</div>
 
-<div>
-    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
-</div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.SeriesDescription)
+        @Html.TextAreaFor(model => model.SeriesDescription, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.SeriesDescription)
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+}

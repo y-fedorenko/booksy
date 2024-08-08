@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Booksy.Models;
 using Booksy.DAL;
+using Microsoft.EntityFrameworkCore;
 
 namespace Booksy.BLL
 {
@@ -37,6 +38,11 @@ namespace Booksy.BLL
         public void DeleteBook(int BookID)
         {
             _bookDAL.DeleteBook(BookID);
+        }
+
+        public async Task<List<Book>> GetBooksBySerieIdAsync(int serieId)
+        {
+            return await _bookDAL.GetBooksBySerieIdAsync(serieId);
         }
     }
 }

@@ -1,26 +1,25 @@
-﻿@model CommentViewModel
+﻿@model Serie
 
 @{
-    ViewData["Title"] = "Add Comment";
+    ViewData["Title"] = "Create Series";
 }
 
-<h2>Add Comment</h2>
+<h2>@ViewData["Title"]</h2>
 
 @using (Html.BeginForm())
 {
     <div class="form-group">
-        @Html.LabelFor(m => m.CommentText)
-        @Html.TextAreaFor(m => m.CommentText, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.CommentText, "", new { @class = "text-danger" })
+        @Html.LabelFor(model => model.SeriesName)
+        @Html.TextBoxFor(model => model.SeriesName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.SeriesName)
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(m => m.UserName)
-        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+        @Html.LabelFor(model => model.SeriesDescription)
+        @Html.TextAreaFor(model => model.SeriesDescription, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.SeriesDescription)
     </div>
 
-    @Html.HiddenFor(m => m.BookId)
-
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
 }

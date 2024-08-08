@@ -44,5 +44,13 @@ namespace Booksy.DAL
                 _context.SaveChanges();
             }
         }
+
+        public async Task<List<Book>> GetBooksBySerieIdAsync(int serieId)
+        {
+            return await _context.Books
+                .Include(b => b.Author)
+                .Where(b => b.SeriesId == serieId)
+                .ToListAsync();
+        }
     }
 }
