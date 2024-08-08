@@ -4,6 +4,7 @@ using Booksy.BLL;
 using Microsoft.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Booksy.Services;
 
 namespace Booksy
 {
@@ -26,6 +27,7 @@ namespace Booksy
             builder.Services.AddScoped<SerieDAL>();
             builder.Services.AddScoped<SerieService>();
             builder.Services.AddScoped<BookService>();
+            builder.Services.AddScoped<AuthorService>();
             builder.Services.AddScoped<CommentService>();
             builder.Services.AddScoped<CommentDAL>();
 

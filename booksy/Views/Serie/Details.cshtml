@@ -1,54 +1,20 @@
-﻿@model Serie
+﻿@model Booksy.Models.Book
 
 @{
-    ViewData["Title"] = "Serie Details";
+    ViewData["Title"] = Model.Title;
 }
 
-<h2>Serie Details</h2>
+<h2>@Model.Title</h2>
+<p>@Model.Description</p>
 
-<div>
-    <h4>Serie</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            Series Name
-        </dt>
-        <dd class="col-sm-10">
-            @Model.SeriesName
-        </dd>
-        <dt class="col-sm-2">
-            Series Description
-        </dt>
-        <dd class="col-sm-10">
-            @Model.SeriesDescription
-        </dd>
-    </dl>
-</div>
+<h3>Comments</h3>
+<ul>
+    @foreach (var comment in Model.Comments)
+    {
+        <li>
+            <strong>@comment.UserName:</strong> @comment.CommentText
+        </li>
+    }
+</ul>
 
-<h4>Books in this Serie</h4>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Category</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var book in Model.Books)
-        {
-            <tr>
-                <td>@book.Title</td>
-                <td>@book.Description</td>
-                <td>@book.Price</td>
-                <td>@book.Category</td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-<p>
-    <a asp-action="Edit" asp-route-SerieId="@Model.SeriesId" class="btn btn-warning">Edit</a> |
-    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
-</p>
+<a href="@Url.Action("AddComment", new { BookId = Model.BookId })" class="btn btn-primary">Add Comment</a>

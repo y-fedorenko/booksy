@@ -1,13 +1,16 @@
 ﻿@model CommentViewModel
 
 @{
-    ViewData["Title"] = "Add Comment";
+    ViewData["Title"] = "Edit Comment";
 }
 
-<h2>Add Comment</h2>
+<h2>Edit Comment</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("EditComment", "Book", FormMethod.Post))
 {
+    @Html.HiddenFor(m => m.CommentId)
+    @Html.HiddenFor(m => m.BookId)
+
     <div class="form-group">
         @Html.LabelFor(m => m.CommentText)
         @Html.TextAreaFor(m => m.CommentText, new { @class = "form-control" })
@@ -20,7 +23,5 @@
         @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
     </div>
 
-    @Html.HiddenFor(m => m.BookId)
-
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Update Comment</button>
 }

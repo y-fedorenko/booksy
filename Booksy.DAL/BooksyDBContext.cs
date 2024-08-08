@@ -92,10 +92,6 @@ namespace Booksy.DAL
                 .IsRequired()
                 .HasMaxLength(255);
 
-            modelBuilder.Entity<Comment>()
-                .Property(c => c.CommentTime)
-                .IsRequired();
-
             // Relations
             modelBuilder.Entity<Book>()
                 .HasOne(book => book.Author)

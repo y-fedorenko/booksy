@@ -5,8 +5,14 @@
 }
 
 <h1>Books</h1>
+
+<!-- Moved the 'Create New' button to the top -->
+<p>
+    <a asp-controller="Book" asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+
 <table class="table">
-    <thead></thead>
+    <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.First().Title)
@@ -17,7 +23,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.First().Price)
             </th>
-            <th></th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -34,14 +40,11 @@
                     @Html.DisplayFor(modelItem => item.Price)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.BookId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.BookId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.BookId">Delete</a>
+                    <a asp-controller="Book" asp-action="Edit" asp-route-BookId="@item.BookId">Edit</a> |
+                    <a asp-controller="Book" asp-action="Details" asp-route-BookId="@item.BookId">Details</a> |
+                    <a asp-controller="Book" asp-action="Delete" asp-route-BookId="@item.BookId">Delete</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
-<p>
-    <a asp-action="Create" class="btn btn-primary">Create New</a>
-</p>

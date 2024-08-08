@@ -1,151 +1,189 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Booksy.DAL;
 using Booksy.BLL;
 using Booksy.Models;
 using Booksy.ViewModels;
+using Booksy.Services;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Booksy.Controllers
+public class BookController : Controller
 {
-    public class BookController : Controller
+    private readonly BookService _bookService;
+    private readonly CommentService _commentService;
+    private readonly AuthorService _authorService;
+    private readonly SerieService _serieService;
+
+    public BookController(BookService bookService, CommentService commentService, AuthorService authorService, SerieService serieService)
     {
-        private readonly BookService _bookService;
-        private readonly AuthorDAL _authorDAL;
-        private readonly SerieDAL _serieDAL;
-        private readonly CommentService _commentService;
+        _bookService = bookService;
+        _commentService = commentService;
+        _authorService = authorService;
+        _serieService = serieService;
+    }
 
-        public BookController(BookService bookService, AuthorDAL authorDAL, SerieDAL serieDAL, CommentService commentService)
+    public IActionResult Index()
+    {
+        var books = _bookService.GetBooks();
+        return View(books);
+    }
+
+    public IActionResult Details(int bookId)
+    {
+        var book = _bookService.GetBook(bookId);
+        if (book == null)
         {
-            _bookService = bookService;
-            _authorDAL = authorDAL;
-            _serieDAL = serieDAL;
-            _commentService = commentService;
+            return NotFound();
         }
-
-        public IActionResult Index()
+        var viewModel = new BookDetailsViewModel
         {
-            var books = _bookService.GetBooks();
-            return View(books);
-        }
+            Book = book,
+            Comments = book.Comments
+        };
+        return View(viewModel);
+    }
+    
+    public async Task<IActionResult> Create()
+    {
+        var authors = await _authorService.GetAllAuthorsAsync();
+        var series = await _serieService.GetSeriesAsync();
 
-        public IActionResult Details(int BookId)
+        var model = new BookViewModel
         {
-            var book = _bookService.GetBook(BookId);
-            if (book == null)
-            {
-                return NotFound();
-            }
+            Authors = authors,
 
-            var comment = new Comment { BookId = BookId };
-            var viewModel = new BookDetailsViewModel
+            Series = series
+        };
+
+        return View(model);
+    }
+    
+
+    [HttpPost]
+    public async Task<IActionResult> Create(BookViewModel bookViewModel)
+    {
+        if (ModelState.IsValid)
+        {
+            var book = new Book
             {
-                Book = book,
-                NewComment = comment,
-                EditComment = null
+                Title = bookViewModel.Title,
+                AuthorId = bookViewModel.AuthorId,
+                Price = bookViewModel.Price,
+                Category = bookViewModel.Category,
+                Description = bookViewModel.Description,
+                CoverUrl = bookViewModel.CoverUrl,
+                DownloadUrl = bookViewModel.DownloadUrl
             };
 
+            _bookService.AddBook(book);
+            return RedirectToAction(nameof(Index));
+        }
+        
+        return View(bookViewModel);
+    }
+
+
+    // GET action to display the form for adding a new comment
+    [HttpGet]
+	public IActionResult CreateComment(int bookId)
+	{
+		var viewModel = new CommentViewModel { BookId = bookId };
+        viewModel.BookId = bookId;
+        viewModel.CommentText = " ";
+        viewModel.UserName = " ";
+		return View(viewModel);
+	}
+
+	[HttpPost]
+	public async Task<IActionResult> CreateComment(CommentViewModel viewModel)
+	{
+		if (!ModelState.IsValid)
+		{
+			
+			var errors = ModelState.Values.SelectMany(v => v.Errors);
+			foreach (var error in errors)
+			{
+				Console.WriteLine(error.ErrorMessage);  
+            }
+			return View(viewModel);
+		}
+
+		var comment = new Comment
+		{
+			BookId = viewModel.BookId,
+			CommentText = viewModel.CommentText,
+			UserName = viewModel.UserName
+		};
+
+		await _commentService.AddCommentAsync(comment);
+		return RedirectToAction("Details", new { bookId = viewModel.BookId }); 
+	}
+
+
+	[HttpGet]
+    public async Task<IActionResult> EditComment(int id)
+    {
+        var comment = await _commentService.GetCommentAsync(id);
+        if (comment == null)
+        {
+            return NotFound();
+        }
+
+        var viewModel = new CommentViewModel
+        {
+            CommentId = comment.CommentId,
+            BookId = comment.BookId,
+            CommentText = comment.CommentText,
+            UserName = comment.UserName
+        };
+        return View(viewModel);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> EditComment(CommentViewModel viewModel)
+    {
+        if (!ModelState.IsValid)
+        {
             return View(viewModel);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Create()
+        var comment = await _commentService.GetCommentAsync(viewModel.CommentId);
+        if (comment == null)
         {
-            var ViewModel = new BookCreateViewModel
-            {
-                Book = new Book(),
-                Authors = await _authorDAL.GetAllAuthorsAsync(),
-                Series = await _serieDAL.GetSeriesAsync()
-            };
-            return View(ViewModel);
+            return NotFound();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Create(BookCreateViewModel ViewModel)
-        {
-            if (ModelState.IsValid)
-            {
-                _bookService.AddBook(ViewModel.Book);
-                return RedirectToAction("Index");
-            }
-            ViewModel.Authors = await _authorDAL.GetAllAuthorsAsync();
-            ViewModel.Series = await _serieDAL.GetSeriesAsync();
-            return View(ViewModel);
-        }
+        comment.CommentText = viewModel.CommentText;
+        comment.UserName = viewModel.UserName;
+        await _commentService.UpdateCommentAsync(comment);
 
-        [HttpGet]
-        public IActionResult Edit(int BookID)
-        {
-            var book = _bookService.GetBook(BookID);
-            if (book == null)
-            {
-                return NotFound();
-            }
-            return View(book);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Edit(int BookID, [Bind("BookID,Title,Author,Genre,Price")] Book book)
-        {
-            if (BookID != book.BookId)
-            {
-                return NotFound();
-            }
-            if (ModelState.IsValid)
-            {
-                _bookService.UpdateBook(book);
-                return RedirectToAction(nameof(Index));
-            }
-            return View(book);
-        }
-
-        [HttpGet]
-        public IActionResult Delete(int BookID)
-        {
-            var book = _bookService.GetBook(BookID);
-            if (book == null)
-            {
-                return NotFound();
-            }
-            return View(book);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        public IActionResult DeleteConfirmed(int BookID)
-        {
-            _bookService.DeleteBook(BookID);
-            return RedirectToAction(nameof(Index));
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> CreateComment(BookDetailsViewModel viewModel)
-        {
-            if (ModelState.IsValid)
-            {
-                await _commentService.AddCommentAsync(viewModel.NewComment);
-                return RedirectToAction("Details", new { BookId = viewModel.NewComment.BookId });
-            }
-
-            viewModel.Book = _bookService.GetBook(viewModel.NewComment.BookId);
-            return View("Details", viewModel);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> EditComment(BookDetailsViewModel viewModel)
-        {
-            if (ModelState.IsValid)
-            {
-                await _commentService.UpdateCommentAsync(viewModel.EditComment);
-                return RedirectToAction("Details", new { BookId = viewModel.EditComment.BookId });
-            }
-
-            viewModel.Book = _bookService.GetBook(viewModel.EditComment.BookId);
-            return View("Details", viewModel);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> DeleteComment(int commentId, int bookId)
-        {
-            await _commentService.DeleteCommentAsync(commentId);
-            return RedirectToAction("Details", new { BookId = bookId });
-        }
+        return RedirectToAction("Details", new { bookId = comment.BookId });
     }
+
+    [HttpGet]
+    public async Task<IActionResult> DeleteComment(int id)
+    {
+        var comment = await _commentService.GetCommentAsync(id);
+        if (comment == null)
+        {
+            return NotFound();
+        }
+        return View(comment);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> DeleteCommentConfirmed(int id)
+    {
+        var comment = await _commentService.GetCommentAsync(id);
+        if (comment == null)
+        {
+            return NotFound();
+        }
+
+        await _commentService.DeleteCommentAsync(id);
+        return RedirectToAction("Details", new { bookId = comment.BookId });  // Redirect back to the details page
+    }
+
 }

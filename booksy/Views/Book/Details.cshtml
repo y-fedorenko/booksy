@@ -4,134 +4,38 @@
     ViewData["Title"] = "Book Details";
 }
 
-<h2>Book Details</h2>
+<h2>@Model.Book.Title</h2>
 
 <div>
-    <h4>Book</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            Title
-        </dt>
-        <dd class="col-sm-10">
-            @Model.Book.Title
-        </dd>
-        <dt class="col-sm-2">
-            Description
-        </dt>
-        <dd class="col-sm-10">
-            @Model.Book.Description
-        </dd>
-        <dt class="col-sm-2">
-            Price
-        </dt>
-        <dd class="col-sm-10">
-            @Model.Book.Price
-        </dd>
-        <dt class="col-sm-2">
-            Category
-        </dt>
-        <dd class="col-sm-10">
-            @Model.Book.Category
-        </dd>
-        <dt class="col-sm-2">
-            Author
-        </dt>
-        <dd class="col-sm-10">
-            @Model.Book.Author?.FirstName @Model.Book.Author?.LastName
-        </dd>
-        <dt class="col-sm-2">
-            Series
-        </dt>
-        <dd class="col-sm-10">
-            @Model.Book.Serie?.SeriesName
-        </dd>
-    </dl>
+    <img src="@Model.Book.CoverUrl" alt="Cover Image" style="max-width:200px; max-height:200px;" />
+    <p>@Model.Book.Description</p>
+    <p><strong>Price:</strong> @Model.Book.Price</p>
+    <p><strong>Category:</strong> @Model.Book.Category</p>
 </div>
 
-<h4>Comments</h4>
-<table class="table table-striped">
+<h3>Comments</h3>
+<table class="table">
     <thead>
         <tr>
             <th>Comment</th>
             <th>User</th>
-            <th>Time</th>
-            <th></th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var comment in Model.Book.Comments)
+        @foreach (var comment in Model.Comments)
         {
             <tr>
                 <td>@comment.CommentText</td>
-                <td>@comment.UserName</td>
-                <td>@comment.CommentTime</td>
+                <td>@comment.UserName</td>>
                 <td>
-                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editCommentModal-@comment.CommentId">Edit</button> |
-                    <form asp-action="DeleteComment" method="post" style="display:inline;">
-                        <input type="hidden" name="commentId" value="@comment.CommentId" />
-                        <input type="hidden" name="bookId" value="@Model.Book.BookId" />
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
+                    <a asp-action="EditComment" asp-route-id="@comment.CommentId" class="btn btn-primary">Edit</a>
+                    <a asp-action="DeleteComment" asp-route-id="@comment.CommentId" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
-
-            <!-- Edit Comment Modal -->
-            <div class="modal fade" id="editCommentModal-@comment.CommentId" tabindex="-1" role="dialog" aria-labelledby="editCommentModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="editCommentModalLabel">Edit Comment</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form asp-action="EditComment" method="post">
-                                <div class="form-group">
-                                    <label asp-for="EditComment.CommentText" class="control-label"></label>
-                                    <input asp-for="EditComment.CommentText" class="form-control" value="@comment.CommentText" />
-                                    <span asp-validation-for="EditComment.CommentText" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="EditComment.UserName" class="control-label"></label>
-                                    <input asp-for="EditComment.UserName" class="form-control" value="@comment.UserName" />
-                                    <span asp-validation-for="EditComment.UserName" class="text-danger"></span>
-                                </div>
-                                <input type="hidden" asp-for="EditComment.CommentId" value="@comment.CommentId" />
-                                <input type="hidden" asp-for="EditComment.BookId" value="@Model.Book.BookId" />
-                                <div class="form-group">
-                                    <input type="submit" value="Save" class="btn btn-primary" />
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
         }
     </tbody>
 </table>
 
-<!-- Add Comment Form -->
-<h4>Add a Comment</h4>
-<form asp-action="CreateComment" method="post">
-    <div class="form-group">
-        <label asp-for="NewComment.CommentText" class="control-label"></label>
-        <input asp-for="NewComment.CommentText" class="form-control" />
-        <span asp-validation-for="NewComment.CommentText" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="NewComment.UserName" class="control-label"></label>
-        <input asp-for="NewComment.UserName" class="form-control" />
-        <span asp-validation-for="NewComment.UserName" class="text-danger"></span>
-    </div>
-    <input type="hidden" asp-for="NewComment.BookId" value="@Model.Book.BookId" />
-    <input type="hidden" asp-for="NewComment.CommentTime" value="@DateTime.Now" />
-    <div class="form-group">
-        <input type="submit" value="Add Comment" class="btn btn-primary" />
-    </div>
-</form>
-
-<div>
-    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
-</div>
+<a asp-action="CreateComment" asp-route-bookId="@Model.Book.BookId" class="btn btn-success">Add Comment</a>
+<a asp-action="Index" class="btn btn-secondary">Back to List</a>
