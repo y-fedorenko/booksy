@@ -3,7 +3,6 @@ using Booksy.DAL;
 using Booksy.BLL;
 using Booksy.Models;
 using Booksy.ViewModels;
-using Booksy.Services;
 
 
 namespace Booksy.Controllers {
