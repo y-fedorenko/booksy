@@ -84,6 +84,65 @@ public class BookController : Controller
         return View(bookViewModel);
     }
 
+    [HttpGet]
+    public async Task<IActionResult> Edit(int bookId)
+    {
+        var book = _bookService.GetBook(bookId);
+        if (book == null)
+        {
+            return NotFound();
+        }
+
+        var authors = await _authorService.GetAllAuthorsAsync();
+        var series = await _serieService.GetSeriesAsync();
+
+        var viewModel = new BookViewModel
+        {
+            BookId = book.BookId,
+            Title = book.Title,
+            Description = book.Description,
+            Price = book.Price,
+            Category = book.Category,
+            AuthorId = book.AuthorId,
+            SeriesId = book.SeriesId,
+            CoverUrl = book.CoverUrl,
+            DownloadUrl = book.DownloadUrl,
+            Authors = authors,
+            Series = series
+        };
+
+        return View(viewModel);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Edit(BookViewModel bookViewModel)
+    {
+        if (ModelState.IsValid)
+        {
+            var book = _bookService.GetBook(bookViewModel.BookId);
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            book.Title = bookViewModel.Title;
+            book.Description = bookViewModel.Description;
+            book.Price = bookViewModel.Price;
+            book.Category = bookViewModel.Category;
+            book.AuthorId = bookViewModel.AuthorId;
+            book.SeriesId = bookViewModel.SeriesId;
+            book.CoverUrl = bookViewModel.CoverUrl;
+            book.DownloadUrl = bookViewModel.DownloadUrl;
+
+            _bookService.UpdateBook(book);
+            return RedirectToAction(nameof(Index));
+        }
+                
+        bookViewModel.Authors = (await _authorService.GetAllAuthorsAsync()).ToList();
+        bookViewModel.Series = (await _serieService.GetSeriesAsync()).ToList();
+
+        return View(bookViewModel);
+    }
 
     // GET action to display the form for adding a new comment
     [HttpGet]
