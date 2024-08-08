@@ -37,6 +37,7 @@ namespace Booksy.Controllers
                 await _authorService.AddAuthorAsync(author);
                 return RedirectToAction(nameof(Index));
             }
+
             return View(author);
         }
 
