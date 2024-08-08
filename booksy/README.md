@@ -64,4 +64,4 @@ To set up the project locally, follow these steps:
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/nishatasha/booksy.git
+   git clone https://github.com/y-fedorenko/booksy.git
