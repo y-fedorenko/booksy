@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Booksy.Models.Author>
+
+@{
+    ViewData["Title"] = "Authors";
+}
+
+<h1>Authors</h1>
+
+<p>
+    <a asp-controller="Author" asp-action="Create" class="btn btn-primary">Create New Author</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Biography</th>
+            <th>Image</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                <td>@item.Biography</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.ImageUrl))
+                    {
+                        <img src="@item.ImageUrl" alt="Author Image" style="max-width: 100px; max-height: 100px;" />
+                    }
+                </td>
+                <td>
+                    <a asp-controller="Author" asp-action="Edit" asp-route-id="@item.AuthorId" class="btn btn-warning">Edit</a>
+                    <a asp-controller="Author" asp-action="Details" asp-route-id="@item.AuthorId" class="btn btn-info">Details</a>
+                    <a asp-controller="Author" asp-action="Delete" asp-route-id="@item.AuthorId" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

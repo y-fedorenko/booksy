@@ -3,18 +3,9 @@ using Booksy.DAL;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Booksy.Services
+namespace Booksy.BLL
 {
-    public interface IAuthorService
-    {
-        Task<IEnumerable<Author>> GetAllAuthorsAsync();
-        Task<Author> GetAuthorByIdAsync(int id);
-        Task AddAuthorAsync(Author author);
-        Task UpdateAuthorAsync(Author author);
-        Task DeleteAuthorAsync(int id);
-    }
-
-    public class AuthorService : IAuthorService
+    public class AuthorService
     {
         private readonly AuthorDAL _authorDAL;
 

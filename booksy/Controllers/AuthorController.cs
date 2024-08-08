@@ -1,17 +1,25 @@
-﻿using Booksy.Models;
-using Booksy.Services;
+﻿using Booksy.BLL;
+using Booksy.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
 namespace Booksy.Controllers
 {
     public class AuthorController : Controller
     {
-        private readonly IAuthorService _authorService;
+        private readonly AuthorService _authorService;
 
-        public AuthorController(IAuthorService authorService)
+        public AuthorController(AuthorService authorService)
         {
             _authorService = authorService;
+        }
+
+        // GET: Author/Index
+        public async Task<IActionResult> Index()
+        {
+            var authors = await _authorService.GetAllAuthorsAsync();
+            return View(authors);
         }
 
         // GET: Author/Create
@@ -54,7 +62,21 @@ namespace Booksy.Controllers
 
             if (ModelState.IsValid)
             {
-                await _authorService.UpdateAuthorAsync(author);
+                try
+                {
+                    await _authorService.UpdateAuthorAsync(author);
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!await AuthorExists(author.AuthorId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
                 return RedirectToAction(nameof(Index));
             }
             return View(author);
@@ -79,11 +101,20 @@ namespace Booksy.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: Author/Index
-        public async Task<IActionResult> Index()
+        // GET: Author/Details/5
+        public async Task<IActionResult> Details(int id)
         {
-            var authors = await _authorService.GetAllAuthorsAsync();
-            return View(authors);
+            var author = await _authorService.GetAuthorByIdAsync(id);
+            if (author == null)
+            {
+                return NotFound();
+            }
+            return View(author);
+        }
+
+        private async Task<bool> AuthorExists(int id)
+        {
+            return await _authorService.GetAuthorByIdAsync(id) != null;
         }
     }
 }
