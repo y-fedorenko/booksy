@@ -12,7 +12,6 @@ namespace Booksy.Models
         public int BookId { get; set; }
         public string CommentText { get; set; }
         public string UserName { get; set; }
-        public DateTime CommentTime { get; set; }
         public Book Book { get; set; }
     }
 }

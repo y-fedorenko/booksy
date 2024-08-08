@@ -1,5 +1,6 @@
 ﻿using Booksy.DAL;
 using Booksy.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +41,11 @@ namespace Booksy.BLL
         public async Task DeleteCommentAsync(int id)
         {
             await _dal.DeleteCommentAsync(id);
+        }
+
+        public async Task<IEnumerable<Comment>> GetCommentsByBookIdAsync(int bookId)
+        {
+            return await _dal.GetCommentsByBookIdAsync(bookId);
         }
     }
 }

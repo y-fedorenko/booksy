@@ -1,49 +1,62 @@
-﻿@model Booksy.ViewModels.BookCreateViewModel
+﻿@model BookViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create New Book";
 }
 
-@using (Html.BeginForm())
+<h2>@ViewData["Title"]</h2>
+
+@using (Html.BeginForm("Create", "Book", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <div class="form-group">
-        @Html.LabelFor(m => m.Book.Title, "Book Name")
-        @Html.TextBoxFor(m => m.Book.Title, new { @class = "form-control", id = "book-title" })
-        @Html.ValidationMessageFor(m => m.Book.Title, "Enter a valid book name", new { @class = "text-danger"})
+    @Html.AntiForgeryToken()
+
+    <div>
+        @Html.LabelFor(m => m.Title)
+        @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Title)
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.Book.Description, "Description")
-        @Html.TextBoxFor(m => m.Book.Description, new { @class = "form-control", id = "book-description" })
-        @Html.ValidationMessageFor(m => m.Book.Description, "Enter a valid description for the book", new { @class = "text-danger" })
+    <div>
+        @Html.LabelFor(m => m.Description)
+        @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Description)
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.Book.Price, "Price")
-        @Html.TextBoxFor(m => m.Book.Price, new { @class = "form-control", id = "book-price" })
-        @Html.ValidationMessageFor(m => m.Book.Price, "Enter a valid amount in number", new { @class = "text-danger" })
+    <div>
+        @Html.LabelFor(m => m.Price)
+        @Html.TextBoxFor(m => m.Price, new { @class = "form-control", type = "number", step = "0.01" })
+        @Html.ValidationMessageFor(m => m.Price)
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.Book.Category, "Category")
-        @Html.TextBoxFor(m => m.Book.Category, new { @class = "form-control", id = "book-category" })
-        @Html.ValidationMessageFor(m => m.Book.Category, "", new { @class = "text-danger" })
+    <div>
+        @Html.LabelFor(m => m.Category)
+        @Html.TextBoxFor(m => m.Category, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Category)
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.Book.AuthorId, "Author")
-        @Html.DropDownListFor(m => m.Book.AuthorId, new SelectList(Model.Authors, "AuthorId", "Name"), "Select an Author", new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Book.AuthorId, "Select a valid author", new { @class = "text-danger" })
+    <div>
+        @Html.LabelFor(m => m.AuthorId, "Author")
+        @Html.DropDownListFor(m => m.AuthorId, new SelectList(Model.Authors, "AuthorId", "LastName"), "-- Select Author --", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.AuthorId)
     </div>
-    @*
-    <div class="form-group">
-        @Html.LabelFor(m => m.Book.SeriesId, "Series")
-        @Html.DropDownListFor(m => m.Book.SeriesId, new SelectList(Model.Series, "SeriesId", "Title"), "Select a Series", new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Book.SeriesId, "Select a valid series", new { @class = "text-danger" })
 
+    <div>
+        @Html.LabelFor(m => m.SeriesId, "Series")
+        @Html.DropDownListFor(m => m.SeriesId, new SelectList(Model.Series, "SeriesId", "SeriesName"), "-- Select Series --", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.SeriesId)
     </div>
-    *@
-    <div class="form-group">
-        <input type="submit" value="Create" class="btn btn-primary" />
+
+    <div>
+        @Html.LabelFor(m => m.CoverUrl)
+        @Html.TextBoxFor(m => m.CoverUrl, new { @class = "form-control", type = "url" })
+        @Html.ValidationMessageFor(m => m.CoverUrl)
     </div>
+
+    <div>
+        @Html.LabelFor(m => m.DownloadUrl)
+        @Html.TextBoxFor(m => m.DownloadUrl, new { @class = "form-control", type = "url" })
+        @Html.ValidationMessageFor(m => m.DownloadUrl)
+    </div>
+
+    <button type="submit" class="btn btn-success">Create</button>
 }

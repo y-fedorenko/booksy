@@ -48,5 +48,12 @@ namespace Booksy.DAL
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<IEnumerable<Comment>> GetCommentsByBookIdAsync(int bookId)
+        {
+            return await _context.Comments
+                                 .Where(c => c.BookId == bookId)
+                                 .ToListAsync();
+        }
     }
 }

@@ -1,0 +1,28 @@
+﻿@model Booksy.Models.SerieViewModel
+
+@{
+    ViewData["Title"] = "Edit Series";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.HiddenFor(model => model.SerieId)
+        @Html.LabelFor(model => model.SeriesName)
+        @Html.TextBoxFor(model => model.SeriesName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.SeriesName)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SeriesDescription)
+        @Html.TextAreaFor(model => model.SeriesDescription, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.SeriesDescription)
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+}

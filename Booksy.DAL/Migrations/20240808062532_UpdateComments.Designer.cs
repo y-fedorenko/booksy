@@ -4,6 +4,7 @@ using Booksy.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Booksy.DAL.Migrations
 {
     [DbContext(typeof(BooksyDbContext))]
-    partial class BooksyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240808062532_UpdateComments")]
+    partial class UpdateComments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -116,6 +119,9 @@ namespace Booksy.DAL.Migrations
                         .IsRequired()
                         .HasMaxLength(65535)
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CommentTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UserName")
                         .IsRequired()

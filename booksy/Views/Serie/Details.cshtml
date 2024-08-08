@@ -1,0 +1,44 @@
+﻿@model Serie
+
+@{
+    ViewData["Title"] = "Series Details";
+}
+
+<h2>@Model.SeriesName</h2>
+
+<div>
+    <h4>Series Description</h4>
+    <p>@Model.SeriesDescription</p>
+</div>
+
+<div>
+    <h4>Books in this Series</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model.Books)
+            {
+                <tr>
+                    <td>@book.Title</td>
+                    <td>@book.Author.FirstName @book.Author.LastName</td>
+                    <td>@book.Price</td>
+                    <td>
+                        <a asp-controller="Book" asp-action="Details" asp-route-bookId="@book.BookId" class="btn btn-info">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-serieId="@Model.SeriesId" class="btn btn-primary">Edit</a>
+    <a asp-action="Delete" asp-route-serieId="@Model.SeriesId" class="btn btn-danger">Delete</a>
+</div>
