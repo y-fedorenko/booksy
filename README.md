@@ -67,7 +67,7 @@ To set up the project locally, follow these steps:
 
 ## License
 
-This project is licensed under the Booksy License - see the LICENSE file for details.
+This project is licensed under the Booksy License.
 
 ## Contact
 
