@@ -40,7 +40,7 @@ Welcome to Booksy, your ultimate online bookstore. Booksy offers a wide range of
 - **Create**: Add a new book to the catalog.
 - **Read**: View detailed information about a book, including its description and author info.
 - **Update**: Edit a book's information.
-- **Delete**: Remove a book from the catalog.
+- **Delete**: Remove a book from the database.
 - **Comments**: Users can leave comments on the book page.
 
 ### Series Page
