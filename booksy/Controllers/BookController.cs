@@ -62,7 +62,7 @@ public class BookController : Controller
     
 
     [HttpPost]
-    public async Task<IActionResult> Create(BookViewModel bookViewModel)
+    public IActionResult Create(BookViewModel bookViewModel)
     {
         if (ModelState.IsValid)
         {
