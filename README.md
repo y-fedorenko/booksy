@@ -9,10 +9,9 @@ Welcome to Booksy, your ultimate online bookstore. Booksy offers a wide range of
 3. [Pages and Functionality](#pages-and-functionality)
 4. [Technologies Used](#technologies-used)
 5. [Installation](#installation)
-6. [Usage](#usage)
-7. [Contributing](#contributing)
-8. [License](#license)
-9. [Contact](#contact)
+6. [License](#license)
+7. [Contact](#contact)
+
 
 ## Project Overview
 
@@ -65,3 +64,14 @@ To set up the project locally, follow these steps:
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/y-fedorenko/booksy.git
+
+## License
+
+This project is licensed under the Booksy License - see the LICENSE file for details.
+
+## Contact
+
+For any questions or feedback, please reach out to:
+
+Email: support@booksy.com
+
