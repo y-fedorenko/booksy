@@ -1,0 +1,54 @@
+﻿@model Serie
+
+@{
+    ViewData["Title"] = "Serie Details";
+}
+
+<h2>Serie Details</h2>
+
+<div>
+    <h4>Serie</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Series Name
+        </dt>
+        <dd class="col-sm-10">
+            @Model.SeriesName
+        </dd>
+        <dt class="col-sm-2">
+            Series Description
+        </dt>
+        <dd class="col-sm-10">
+            @Model.SeriesDescription
+        </dd>
+    </dl>
+</div>
+
+<h4>Books in this Serie</h4>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Category</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model.Books)
+        {
+            <tr>
+                <td>@book.Title</td>
+                <td>@book.Description</td>
+                <td>@book.Price</td>
+                <td>@book.Category</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>
+    <a asp-action="Edit" asp-route-SerieId="@Model.SeriesId" class="btn btn-warning">Edit</a> |
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</p>

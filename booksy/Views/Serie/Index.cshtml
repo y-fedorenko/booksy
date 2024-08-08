@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Serie>
+
+@{
+    ViewData["Title"] = "Series List";
+}
+
+<h2>Series List</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New Serie</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Series Name</th>
+            <th>Series Description</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.SeriesName</td>
+                <td>@item.SeriesDescription</td>
+                <td>
+                    <a asp-action="Details" asp-route-SerieId="@item.SeriesId" class="btn btn-info">Details</a> |
+                    <a asp-action="Edit" asp-route-SerieId="@item.SeriesId" class="btn btn-warning">Edit</a> |
+                    <a asp-action="Delete" asp-route-SerieId="@item.SeriesId" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

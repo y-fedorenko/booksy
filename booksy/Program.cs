@@ -16,23 +16,18 @@ namespace Booksy
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            //Register DbContext here
+            // Register DbContext here
             builder.Services.AddDbContext<BooksyDbContext>(
                 options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            
-            //Register DAL and BLL service
+            // Register DAL and BLL services
             builder.Services.AddScoped<AuthorDAL>();
             builder.Services.AddScoped<BookDAL>();
             builder.Services.AddScoped<SerieDAL>();
+            builder.Services.AddScoped<SerieService>();
             builder.Services.AddScoped<BookService>();
-            //Do the same for the Perfomance and Stage
-
-
-
-
-            // Add services to the container.
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddScoped<CommentService>();
+            builder.Services.AddScoped<CommentDAL>();
 
             var app = builder.Build();
 

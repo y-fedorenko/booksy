@@ -1,0 +1,34 @@
+﻿@model SerieViewModel
+
+@{
+    ViewData["Title"] = "Edit Serie";
+}
+
+<h2>Edit Serie</h2>
+
+<h4>Serie</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Edit">
+            <div class="form-group">
+                <input type="hidden" asp-for="SerieId" />
+                <label asp-for="SeriesName" class="control-label"></label>
+                <input asp-for="SeriesName" class="form-control" />
+                <span asp-validation-for="SeriesName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SeriesDescription" class="control-label"></label>
+                <input asp-for="SeriesDescription" class="form-control" />
+                <span asp-validation-for="SeriesDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>
