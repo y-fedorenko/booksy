@@ -4,6 +4,7 @@
     ViewData["Title"] = "Book Details";
 }
 
+<div style="margin-top: 100px;">
 <h2>@Model.Book.Title</h2>
 <div>
     <div>
@@ -44,3 +45,4 @@
 
 <a asp-action="CreateComment" asp-route-bookId="@Model.Book.BookId" class="btn btn-success">Add Comment</a>
 <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>

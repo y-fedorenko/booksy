@@ -4,6 +4,7 @@
     ViewData["Title"] = "Series Details";
 }
 
+<div style="margin-top: 130px;">
 <h2>@Model.SeriesName</h2>
 
 <div>
@@ -41,4 +42,5 @@
 <div>
     <a asp-action="Edit" asp-route-serieId="@Model.SeriesId" class="btn btn-primary">Edit</a>
     <a asp-action="Delete" asp-route-serieId="@Model.SeriesId" class="btn btn-danger">Delete</a>
+</div>
 </div>

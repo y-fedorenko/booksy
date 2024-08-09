@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Edit Book";
 }
-
+<div style="margin-top: 100px;">
 <h2>@ViewData["Title"]</h2>
 
 @using (Html.BeginForm("Edit", "Book", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -11,7 +11,7 @@
     @Html.AntiForgeryToken()
 
     @Html.HiddenFor(m => m.BookId)
-
+    
     <div class="form-group">
         @Html.LabelFor(m => m.Title)
         @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
@@ -60,5 +60,6 @@
         @Html.ValidationMessageFor(m => m.DownloadUrl)
     </div>
 
-    <button type="submit" class="btn btn-success">Update</button>
+    <button type="submit" class="btn btn-success" style="margin-top: 15px;">Update</button>
 }
+</div>

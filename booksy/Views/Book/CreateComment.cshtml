@@ -4,8 +4,9 @@
     ViewData["Title"] = "Add Comment";
 }
 
-<h2>Add Comment</h2>
 
+<div style="margin-top: 130px;">
+<h2>Add Comment</h2>
 <form asp-action="CreateComment" method="post">
     <input type="hidden" asp-for="BookId" />
 
@@ -21,9 +22,9 @@
         <span asp-validation-for="UserName" class="text-danger"></span>
     </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary" style="margin-top: 15px;">Submit</button>
 </form>
-
+</div>
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

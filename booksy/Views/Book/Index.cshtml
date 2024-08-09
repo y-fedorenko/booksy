@@ -4,10 +4,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<div style="margin-top: 100px;">
 <h1 class="page-title">Books</h1>
 
 <p>
-    <a asp-controller="Book" asp-action="Create" class="btn btn-primary btn-info create-btn">Create New</a>
+    <a asp-controller="Book" asp-action="Create" class="btn btn-primary">Create New</a>
 </p>
 
 <div class="table-responsive">
@@ -48,4 +49,5 @@
             }
         </tbody>
     </table>
+</div>
 </div>
