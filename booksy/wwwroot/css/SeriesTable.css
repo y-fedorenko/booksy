@@ -1,0 +1,69 @@
+﻿/* General Styles */
+.series-container {
+    padding: 20px;
+}
+
+.create-series-btn {
+    margin-bottom: 20px;
+}
+
+/* Table Styles */
+.table-responsive {
+    margin: 0 auto;
+    max-width: 90%;
+}
+
+.table {
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+    .table thead th {
+        background-color: #343a40;
+        color: #fff;
+        padding: 10px;
+    }
+
+    .table tbody tr {
+        background-color: #f8f9fa;
+        border-bottom: 2px solid #dee2e6;
+        transition: background-color 0.3s ease;
+    }
+
+        .table tbody tr:hover {
+            background-color: #e9ecef;
+        }
+
+    .table td {
+        padding: 15px;
+        vertical-align: middle;
+    }
+
+/* Action Buttons Alignment */
+.action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.btn-success, .btn-info, .btn-danger {
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    border-radius: 5px;
+}
+
+    /* Custom hover effects for buttons */
+    .btn-success:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+    }
+
+    .btn-info:hover {
+        background-color: #117a8b;
+        border-color: #10707f;
+    }
+
+    .btn-danger:hover {
+        background-color: #c82333;
+        border-color: #bd2130;
+    }

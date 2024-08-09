@@ -1,10 +1,5 @@
 ﻿/* General Page Styles */
-.page-title {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    color: #333;
-    text-align: center;
-}
+
 
 .create-btn {
     margin-bottom: 20px;
@@ -14,40 +9,6 @@
 }
 
 /* Table Styles */
-.table-responsive {
-    margin: 0 auto;
-    max-width: 90%;
-}
-
-.table {
-    border-collapse: separate;
-    border-spacing: 0 10px;
-}
-
-    .table thead th {
-        background-color: #343a40;
-        color: #fff;
-        padding: 10px;
-    }
-
-    .table tbody tr {
-        background-color: #f8f9fa;
-        border-bottom: 2px solid #dee2e6;
-        transition: background-color 0.3s ease;
-    }
-
-        .table tbody tr:hover {
-            background-color: #e9ecef;
-        }
-
-    .table td {
-        padding: 15px;
-        vertical-align: middle;
-    }
-
-        .table td a {
-            margin-right: 10px;
-        }
 
 .btn-outline-secondary, .btn-outline-info, .btn-outline-danger {
     padding: 5px 10px;
