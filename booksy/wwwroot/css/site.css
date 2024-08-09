@@ -1,3 +1,7 @@
+* {
+    transition: all ease-in-out 0.3s;
+}
+
 html {
     font-family: 'Montserrat', sans-serif;
 }
@@ -185,3 +189,30 @@ footer {
         footer a:hover {
             text-decoration: underline;
         }
+
+
+.btn-primary {
+    background-color: #71c4ef;
+    border: 2px solid #71c4ef;
+    color: #000;
+}
+    .btn-primary:hover {
+        background-color: #00668c;
+        color: #fff;
+    }
+
+.btn-danger, btn-secondary {
+    background-color: #fff;
+    border: 2px solid #71c4ef;
+    color: #000;
+}
+
+    .btn-danger:hover {
+        background-color: #71c4ef;
+        color: #fff;
+    }
+
+.crud-action:hover {
+    border: 2px solid #ff6b6b;
+    transform: scale(1.05);
+}
