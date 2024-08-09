@@ -14,12 +14,9 @@
     <div class="books">
         @foreach (var book in Model) {
             <div>
+                <a asp-controller="Book" asp-action="Details" asp-route-BookId="@book.BookId" style="text-decoration: none; color: inherit;">
                 @await Html.PartialAsync("_BookViewPartial", (object)book)
-                <div style="margin-left: 50px; color:#000;">
-                    <a asp-controller="Book" asp-action="Edit" asp-route-BookId="@book.BookId" style="text-decoration: none; color: inherit;">Edit</a>
-                    <a asp-controller="Book" asp-action="Details" asp-route-BookId="@book.BookId" style="text-decoration: none; color: inherit;">Details</a>
-                    <a asp-controller="Book" asp-action="Delete" asp-route-BookId="@book.BookId" style="text-decoration: none; color: inherit;">Delete</a>
-                </div>
+                </a>
             </div>
         }
     </div>

@@ -5,12 +5,17 @@
 }
 
 <h2>@Model.Book.Title</h2>
-
 <div>
-    <img src="@Model.Book.CoverUrl" alt="Cover Image" style="max-width:200px; max-height:200px;" />
-    <p>@Model.Book.Description</p>
-    <p><strong>Price:</strong> @Model.Book.Price</p>
-    <p><strong>Category:</strong> @Model.Book.Category</p>
+    <div>
+        <img src="@Model.Book.CoverUrl" alt="Cover Image" style="max-width:200px; max-height:200px;" />
+        <p>@Model.Book.Description</p>
+        <p><strong>Price:</strong> @Model.Book.Price</p>
+        <p><strong>Category:</strong> @Model.Book.Category</p>
+    </div>
+     <div>
+        <a asp-controller="Book" asp-action="Edit" asp-route-BookId="@Model.Book.BookId" class="btn btn-primary">Edit</a>
+        <a asp-controller="Book" asp-action="Delete" asp-route-BookId="@Model.Book.BookId" class="btn btn-danger">Delete</a>
+    </div>
 </div>
 
 <h3>Comments</h3>
