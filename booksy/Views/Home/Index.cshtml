@@ -26,12 +26,12 @@
 </div>
 
 <div class="back">
-    <h3>Books</h3>
+    <h3 style="color:#131313;">Books</h3>
     <div class="books">
         @{
             int bookCount = 0;
             foreach (var book in Model.Books) {
-                if (bookCount++ >= 10) break;
+                if (bookCount++ >= 5) break;
                 @await Html.PartialAsync("_BookPartial", (object)book)
             }
         }

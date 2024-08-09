@@ -6,60 +6,60 @@
 
 <h2>@ViewData["Title"]</h2>
 
-@using (Html.BeginForm("Create", "Book", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Create", "Book", FormMethod.Post, new { enctype = "multipart/form-data", style = "margin-top: 20px; padding: 20px;" }))
 {
     @Html.AntiForgeryToken()
 
-    <div>
+    <div style="margin-top: 10px;">
         @Html.LabelFor(m => m.Title)
         @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.Title)
     </div>
 
-    <div>
+    <div style="margin-top: 10px;">
         @Html.LabelFor(m => m.Description)
         @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.Description)
     </div>
 
-    <div>
+    <div style="margin-top: 10px;">
         @Html.LabelFor(m => m.Price)
         @Html.TextBoxFor(m => m.Price, new { @class = "form-control", type = "number", step = "0.01" })
         @Html.ValidationMessageFor(m => m.Price)
     </div>
 
-    <div>
+    <div style="margin-top: 10px;">
         @Html.LabelFor(m => m.Category)
         @Html.TextBoxFor(m => m.Category, new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.Category)
     </div>
 
-    <div>
+    <div style="margin-top: 10px;">
         @Html.LabelFor(m => m.AuthorId, "Author")
         @Html.DropDownListFor(m => m.AuthorId, new SelectList(Model.Authors, "AuthorId", "LastName"), "-- Select Author --", new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.AuthorId)
     </div>
 
-    <div>
+    <div style="margin-top: 10px;">
         @Html.LabelFor(m => m.SeriesId, "Series")
         @Html.DropDownListFor(m => m.SeriesId, new SelectList(Model.Series, "SeriesId", "SeriesName"), "-- Select Series --", new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.SeriesId)
     </div>
 
-    <div>
+    <div style="margin-top: 10px;">
         @Html.LabelFor(m => m.CoverUrl)
         @Html.TextBoxFor(m => m.CoverUrl, new { @class = "form-control", type = "url" })
         @Html.ValidationMessageFor(m => m.CoverUrl)
     </div>
 
-    <div>
+    <div style="margin-top: 10px;">
         @Html.LabelFor(m => m.DownloadUrl)
         @Html.TextBoxFor(m => m.DownloadUrl, new { @class = "form-control", type = "url" })
         @Html.ValidationMessageFor(m => m.DownloadUrl)
     </div>
 
-    <form asp-controller="Book" asp-action="Create" method="post">
-        <button type="submit" class="btn btn-primary">Create</button>
+    <form asp-controller="Book" asp-action="Create" method="post" >
+        <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Create</button>
     </form>
 
 }

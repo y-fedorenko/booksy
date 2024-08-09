@@ -15,8 +15,8 @@
     <div style="width: 60%">
         <p><strong>Description</strong></p>
         <p>@Model.Book.Description</p>
-        <a asp-controller="Book" asp-action="Edit" asp-route-BookId="@Model.Book.BookId" class="btn btn-primary">Edit</a>
-        <a asp-controller="Book" asp-action="Delete" asp-route-BookId="@Model.Book.BookId" class="btn btn-danger">Delete</a>
+            <a asp-controller="Book" asp-action="Edit" asp-route-BookId="@Model.Book.BookId" class="btn btn-success"><i class="fas fa-pen"></i></a>
+            <a asp-controller="Book" asp-action="Delete" asp-route-BookId="@Model.Book.BookId" class="btn btn-danger"><i class="fas fa-trash"></i></a>
     </div>
 </div>
 <a scr="@Model.Book.DownloadUrl" class="btn btn-primary">Download</a>

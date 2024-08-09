@@ -69,10 +69,6 @@ namespace Booksy.DAL
                 .Property(a => a.Biography)
                 .HasMaxLength(65535);
 
-            modelBuilder.Entity<Author>()
-                .Property(a => a.ImageUrl)
-                .HasMaxLength(2083);
-
             modelBuilder.Entity<Serie>()
                 .Property(s => s.SeriesName)
                 .IsRequired()

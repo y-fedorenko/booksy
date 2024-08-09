@@ -35,15 +35,22 @@
                         @Html.DisplayFor(modelItem => item.Title)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Author)
+                            @if (item.Author != null)
+                            {
+                                @item.Author.FirstName @item.Author.LastName
+                            }
+                            else
+                            {
+                                <em>Unknown</em>
+                            }
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Price)
                     </td>
                     <td>
-                        <a asp-controller="Book" asp-action="Edit" asp-route-BookId="@item.BookId" class="btn btn-success btn-sm">Edit</a>
-                        <a asp-controller="Book" asp-action="Details" asp-route-BookId="@item.BookId" class="btn btn-info btn-sm">Details</a>
-                        <a asp-controller="Book" asp-action="Delete" asp-route-BookId="@item.BookId" class="btn btn-danger btn-sm">Delete</a>
+                            <a asp-controller="Book" asp-action="Edit" asp-route-BookId="@item.BookId" class="btn btn-success btn-sm"><i class="fas fa-pen"></i></a>
+                            <a asp-controller="Book" asp-action="Details" asp-route-BookId="@item.BookId" class="btn btn-secondary btn-sm"> <i class="fas fa-info-circle"></i></a>
+                            <a asp-controller="Book" asp-action="Delete" asp-route-BookId="@item.BookId" class="btn btn-danger btn-sm"> <i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
             }
