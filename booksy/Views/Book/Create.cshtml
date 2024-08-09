@@ -58,5 +58,8 @@
         @Html.ValidationMessageFor(m => m.DownloadUrl)
     </div>
 
-    <button type="submit" class="btn btn-success">Create</button>
+    <form asp-controller="Book" asp-action="Create" method="post">
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+
 }

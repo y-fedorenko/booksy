@@ -9,6 +9,18 @@ body {
     padding: 0;
     background-color: #f4f4f4;
 }
+center {
+    text-align: center;
+    justify-content: center;
+}
+
+book-selection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-left: 20px;
+}
 
 .navbar {
     width: 100%;

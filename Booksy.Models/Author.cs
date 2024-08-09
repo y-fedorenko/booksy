@@ -17,6 +17,6 @@ namespace Booksy.Models
 
         public string? ImageUrl { get; set; }
 
-        public ICollection<Book> Books { get; set; }
+        public ICollection<Book> Books { get; set; } = new List<Book>();
     }
 }
