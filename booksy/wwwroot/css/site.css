@@ -1,5 +1,9 @@
+html {
+    font-family: 'Montserrat', sans-serif;
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Montserrat', sans-serif;
     line-height: 1.6;
     margin: 0;
     padding: 0;
@@ -56,6 +60,7 @@ book-selection {
     align-items: center;
     justify-content: center;
     text-align: center;
+    border-radius: 10px;
 }
 
     .hero-section .container {
@@ -78,15 +83,16 @@ book-selection {
 .cta-button {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #ff6b6b;
-    color: #fff;
+    background-color: #71c4ef;
+    color: black;
     text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.3s;
 }
 
     .cta-button:hover {
-        background-color: #ff4757;
+        background-color: #00668c;
+        color: #fff;
     }
 
 .container {
@@ -99,21 +105,31 @@ h2, h3 {
     text-align: center;
 }
 
-.books, .authors-container {
+.books, .authors {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
 .books {
-    background-color: antiquewhite;
+    background-color: #f5f4f1;
     padding: 20px;
+    margin: 0 -110px 0 -110px;
+    padding-bottom: 50px;
+}
+
+.author {
+    margin: 0 -110px 0 -110px;
 }
 
 .back {
-    background-color: antiquewhite;
-
+    height: 1065px;
+    padding: 10px 0 0 0;
+    background-color: #f5f4f1;
     width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .book, .author {

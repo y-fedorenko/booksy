@@ -4,20 +4,48 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Books</h1>
+<h1 class="page-title">Books</h1>
 
-<div class="back">
-    <h3>Books</h3>
-    <p>
-        <a asp-controller="Book" asp-action="Create" class="btn btn-primary">Create New</a>
-    </p>
-    <div class="books">
-        @foreach (var book in Model) {
-            <div>
-                <a asp-controller="Book" asp-action="Details" asp-route-BookId="@book.BookId" style="text-decoration: none; color: inherit;">
-                @await Html.PartialAsync("_BookViewPartial", (object)book)
-                </a>
-            </div>
-        }
-    </div>
+<p>
+    <a asp-controller="Book" asp-action="Create" class="btn btn-primary btn-info create-btn">Create New</a>
+</p>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Author)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Price)
+                </th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Author)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        <a asp-controller="Book" asp-action="Edit" asp-route-BookId="@item.BookId" class="btn btn-success btn-sm">Edit</a>
+                        <a asp-controller="Book" asp-action="Details" asp-route-BookId="@item.BookId" class="btn btn-info btn-sm">Details</a>
+                        <a asp-controller="Book" asp-action="Delete" asp-route-BookId="@item.BookId" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
