@@ -1,51 +1,26 @@
 ﻿@model IEnumerable<Booksy.Models.Book>
-
 @{
     ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Books</h1>
 
-<!-- Moved the 'Create New' button to the top -->
-<p>
-    <a asp-controller="Book" asp-action="Create" class="btn btn-primary">Create New</a>
-</p>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.First().Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.First().Author)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.First().Price)
-            </th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Author.FirstName)
-                    @Html.DisplayFor(modelItem => item.Author.LastName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    <a asp-controller="Book" asp-action="Edit" asp-route-BookId="@item.BookId">Edit</a> |
-                    <a asp-controller="Book" asp-action="Details" asp-route-BookId="@item.BookId">Details</a> |
-                    <a asp-controller="Book" asp-action="Delete" asp-route-BookId="@item.BookId">Delete</a>
-                </td>
-            </tr>
+<div class="back">
+    <h3>Books</h3>
+    <p>
+        <a asp-controller="Book" asp-action="Create" class="btn btn-primary">Create New</a>
+    </p>
+    <div class="books">
+        @foreach (var book in Model) {
+            <div>
+                @await Html.PartialAsync("_BookViewPartial", (object)book)
+                <div style="margin-left: 50px; color:#000;">
+                    <a asp-controller="Book" asp-action="Edit" asp-route-BookId="@book.BookId" style="text-decoration: none; color: inherit;">Edit</a>
+                    <a asp-controller="Book" asp-action="Details" asp-route-BookId="@book.BookId" style="text-decoration: none; color: inherit;">Details</a>
+                    <a asp-controller="Book" asp-action="Delete" asp-route-BookId="@book.BookId" style="text-decoration: none; color: inherit;">Delete</a>
+                </div>
+            </div>
         }
-    </tbody>
-</table>
+    </div>
+</div>
