@@ -11,6 +11,7 @@
         <a asp-controller="Author" asp-action="Create" class="btn btn-primary">Create New Author</a>
     </p>
 
+<<<<<<< HEAD
     <div class="table-responsive">
         <table class="table table-striped table-hover">
             <thead class="table-dark">
@@ -46,3 +47,37 @@
         </table>
     </div>
 </div>
+=======
+<table class="table">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Biography</th>
+            <th>Image</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                <td>@item.Biography</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.ImageUrl))
+                    {
+                        <img src="@item.ImageUrl" alt="Author Image" style="max-width: 100px; max-height: 100px;" />
+                    }
+                </td>
+                <td>
+                    <a asp-controller="Author" asp-action="Edit" asp-route-id="@item.AuthorId" class="btn btn-warning"> <i class="fas fa-pen"></i></a>
+                    <a asp-controller="Author" asp-action="Details" asp-route-id="@item.AuthorId" class="btn btn-info"> <i class="fas fa-info-circle"></i></a>
+                    <a asp-controller="Author" asp-action="Delete" asp-route-id="@item.AuthorId" class="btn btn-danger"> <i class="fas fa-trash"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+>>>>>>> 044c87c (favicons added)
