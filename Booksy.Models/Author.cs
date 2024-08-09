@@ -15,8 +15,8 @@ namespace Booksy.Models
         public string? LastName { get; set; }
 
         public string? Biography { get; set; }
-        public string? ImageUrl { get; set; }
-        [Url(ErrorMessage = "Invalid URL format.")]
+
         public ICollection<Book> Books { get; set; } = new List<Book>();
+
     }
 }

@@ -59,7 +59,6 @@ book-selection {
     background: url('https://example.com/hero-background.jpg') no-repeat center center;
     color: #fff;
     padding: 100px 0;
-    margin-top: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -107,6 +106,8 @@ book-selection {
 
 h2, h3 {
     text-align: center;
+    margin-top:30px;
+    margin-bottom:15px;
 }
 
 .books, .authors {
@@ -116,9 +117,7 @@ h2, h3 {
 }
 
 .books {
-    background-color: #f5f4f1;
     padding: 20px;
-    margin: 0 -110px 0 -110px;
     padding-bottom: 50px;
 }
 
@@ -127,13 +126,10 @@ h2, h3 {
 }
 
 .back {
-    height: 1065px;
     padding: 10px 0 0 0;
-    background-color: #f5f4f1;
+    background-color: #b1b1b1;
     width: 100%;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
 }
 
 .book, .author {
