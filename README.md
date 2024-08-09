@@ -9,8 +9,9 @@ Welcome to Booksy, your ultimate online bookstore. Booksy offers a wide range of
 3. [Pages and Functionality](#pages-and-functionality)
 4. [Technologies Used](#technologies-used)
 5. [Installation](#installation)
-6. [License](#license)
-7. [Contact](#contact)
+6. [Running the Project](#running-the-project)
+7. [License](#license)
+
 
 
 ## Project Overview
@@ -65,13 +66,27 @@ To set up the project locally, follow these steps:
    ```bash
    git clone https://github.com/y-fedorenko/booksy.git
 
+2. **Open the project in Visual Studio:**
+   Navigate to the project folder and open the .sln file in Visual Studio.
+   
+4. **Set up the database:**
+  Update the connection string in appsettings.json to match your SQL Server configuration.
+  Open the Package Manager Console in Visual Studio (Tools > NuGet Package Manager > Package Manager Console).
+  Ensure the default project in the console dropdown is set to your project's data layer (e.g., Booksy.DAL).
+  Run the following command to apply migrations and create the database:
+   ```powershell
+   Update-Database
+   
+4. **Restore dependencies:**
+ In Visual Studio, restore the necessary NuGet packages by right-clicking on the solution in Solution Explorer and selecting Restore NuGet Packages
+
+ ## Running the Project
+ 
+ Run the application
+    Press F5 or click the Start button in Visual Studio to build and run the application.
+   
 ## License
 
 This project is licensed under the Booksy License.
 
-## Contact
-
-For any questions or feedback, please reach out to:
-
-Email: support@booksy.com
 

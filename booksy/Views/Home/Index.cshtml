@@ -1,4 +1,5 @@
-﻿@{
+﻿@using System.Linq
+@{
     ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -25,20 +26,25 @@
 </div>
 
 <div class="back">
-<h3>Books</h3>
-<div class="books">
-    @foreach (var book in Model.Books)
-    {
-        @await Html.PartialAsync("_BookPartial", (object)book)
-    }
-</div>
+    <h3>Books</h3>
+    <div class="books">
+        @{
+            int bookCount = 0;
+            foreach (var book in Model.Books) {
+                if (bookCount++ >= 10) break;
+                @await Html.PartialAsync("_BookPartial", (object)book)
+            }
+        }
+    </div>
 </div>
 
 <h3 class="author-title">Authors</h3>
 <div class="authors">
-    @foreach (var author in Model.Authors)
-    {
-        @await Html.PartialAsync("_AuthorPartial", (object)author)
+    @{
+        int authorCount = 0;
+        foreach (var author in Model.Authors) {
+            if (authorCount++ >= 10) break;
+            @await Html.PartialAsync("_AuthorPartial", (object)author)
+        }
     }
 </div>
-
