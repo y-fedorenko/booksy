@@ -5,19 +5,20 @@
 }
 
 <h2>@Model.Book.Title</h2>
-<div>
-    <div>
+<div style="display: flex; gap: 50px; margin-top:50px;">
+    <div style="width:40%">
         <img src="@Model.Book.CoverUrl" alt="Cover Image" style="max-width:200px; max-height:200px;" />
-        <p>@Model.Book.Description</p>
         <p><strong>Price:</strong> @Model.Book.Price</p>
         <p><strong>Category:</strong> @Model.Book.Category</p>
     </div>
-     <div>
+    <div style="width: 60%">
+        <p><strong>Description</strong></p>
+        <p>@Model.Book.Description</p>
         <a asp-controller="Book" asp-action="Edit" asp-route-BookId="@Model.Book.BookId" class="btn btn-primary">Edit</a>
         <a asp-controller="Book" asp-action="Delete" asp-route-BookId="@Model.Book.BookId" class="btn btn-danger">Delete</a>
     </div>
 </div>
-
+<a scr="@Model.Book.DownloadUrl" class="btn btn-primary">Download</a>
 <h3>Comments</h3>
 <table class="table">
     <thead>
@@ -28,8 +29,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var comment in Model.Comments)
-        {
+        @foreach (var comment in Model.Comments) {
             <tr>
                 <td>@comment.CommentText</td>
                 <td>@comment.UserName</td>>
