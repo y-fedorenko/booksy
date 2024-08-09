@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -14,9 +15,8 @@ namespace Booksy.Models
         public string? LastName { get; set; }
 
         public string? Biography { get; set; }
-
         public string? ImageUrl { get; set; }
-
+        [Url(ErrorMessage = "Invalid URL format.")]
         public ICollection<Book> Books { get; set; } = new List<Book>();
     }
 }
