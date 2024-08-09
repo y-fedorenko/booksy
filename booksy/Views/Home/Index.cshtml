@@ -10,14 +10,14 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="content" style="margin-top: 35px;">
-                    <h1>Helping Canadians Live Life Well</h1>
-                    <p>You may know us as your favourite grocery chain, but did you know we're also innovators across lifestyle, wellness, finance, and rewards?</p>
+                    <h1>Explore Endless Stories at Booksy</h1>
+                    <p>Discover your next great read at Booksy, where stories come alive and every page turns into an adventure.</p>
                     <a href="#" class="cta-button">See what we do</a>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="image-container">
-                    <img src="https://images.unsplash.com/photo-1457369804613-52c61a468e7d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Helping Canadians Live Life Well" class="img-fluid" />
+                    <img src="https://images.pexels.com/photos/2908984/pexels-photo-2908984.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Helping Canadians Live Life Well" class="img-fluid" />
                 </div>
             </div>
         </div>
@@ -34,10 +34,11 @@
 </div>
 </div>
 
-<h3>Authors</h3>
-<div class="authors-container">
+<h3 class="author-title">Authors</h3>
+<div class="authors">
     @foreach (var author in Model.Authors)
     {
         @await Html.PartialAsync("_AuthorPartial", (object)author)
     }
 </div>
+

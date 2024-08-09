@@ -1,6 +1,6 @@
 ﻿@model Booksy.Models.Book
 
-<div class="book-item">
+<div class="book-item hover-effect">
     <img src="@Model.CoverUrl" alt="@Model.Title" />
     <h4>@Model.Title</h4>
     <p>@Model.Description</p>
@@ -29,4 +29,16 @@
     h3 {
         font-size: 3em;
     }
+
+    .hover-effect {
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .hover-effect:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
 </style>

@@ -4,47 +4,48 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Books</h1>
+<h1 class="page-title">Books</h1>
 
-<!-- Moved the 'Create New' button to the top -->
 <p>
-    <a asp-controller="Book" asp-action="Create" class="btn btn-primary">Create New</a>
+    <a asp-controller="Book" asp-action="Create" class="btn btn-primary btn-info create-btn">Create New</a>
 </p>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.First().Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.First().Author)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.First().Price)
-            </th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Author)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    <a asp-controller="Book" asp-action="Edit" asp-route-BookId="@item.BookId">Edit</a> |
-                    <a asp-controller="Book" asp-action="Details" asp-route-BookId="@item.BookId">Details</a> |
-                    <a asp-controller="Book" asp-action="Delete" asp-route-BookId="@item.BookId">Delete</a>
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Author)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Price)
+                </th>
+                <th>Actions</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Author)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        <a asp-controller="Book" asp-action="Edit" asp-route-BookId="@item.BookId" class="btn btn-success btn-sm">Edit</a>
+                        <a asp-controller="Book" asp-action="Details" asp-route-BookId="@item.BookId" class="btn btn-info btn-sm">Details</a>
+                        <a asp-controller="Book" asp-action="Delete" asp-route-BookId="@item.BookId" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
