@@ -34,9 +34,9 @@
                     }
                 </td>
                 <td>
-                    <a asp-controller="Author" asp-action="Edit" asp-route-id="@item.AuthorId" class="btn btn-warning">Edit</a>
-                    <a asp-controller="Author" asp-action="Details" asp-route-id="@item.AuthorId" class="btn btn-info">Details</a>
-                    <a asp-controller="Author" asp-action="Delete" asp-route-id="@item.AuthorId" class="btn btn-danger">Delete</a>
+                    <a asp-controller="Author" asp-action="Edit" asp-route-id="@item.AuthorId" class="btn btn-warning"> <i class="fas fa-pen"></i></a>
+                    <a asp-controller="Author" asp-action="Details" asp-route-id="@item.AuthorId" class="btn btn-info"> <i class="fas fa-info-circle"></i></a>
+                    <a asp-controller="Author" asp-action="Delete" asp-route-id="@item.AuthorId" class="btn btn-danger"> <i class="fas fa-trash"></i></a>
                 </td>
             </tr>
         }

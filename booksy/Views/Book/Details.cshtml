@@ -23,19 +23,25 @@
 <table class="table">
     <thead>
         <tr>
+            <th>User Name</th>
             <th>Comment</th>
-            <th>User</th>
-            <th>Actions</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var comment in Model.Comments) {
             <tr>
-                <td>@comment.CommentText</td>
-                <td>@comment.UserName</td>>
+                <td>@comment.UserName</td>
+                <td>@comment.CommentText</td>>
                 <td>
-                    <a asp-action="EditComment" asp-route-id="@comment.CommentId" class="btn btn-primary">Edit</a>
-                    <a asp-action="DeleteComment" asp-route-id="@comment.CommentId" class="btn btn-danger">Delete</a>
+                    <a asp-action="EditComment" asp-route-id="@comment.CommentId" class="btn crud-action" style="color: #71c4ef; border: 2px solid #71c4ef;">
+                        <i class="fas fa-pen"></i>
+                    </a>
+                    <a asp-action="DeleteComment" asp-route-id="@comment.CommentId" class="btn crud-action" style="background-color: #71c4ef; color: #fff; border: 2px solid #71c4ef;">
+                        <i class="fas fa-trash"></i>
+                    </a>
+
+
                 </td>
             </tr>
         }
